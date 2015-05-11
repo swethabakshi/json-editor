@@ -19,6 +19,7 @@ JSONEditor.defaults.themes.bootstrap3 = JSONEditor.AbstractTheme.extend({
   },
   getTextareaInput: function() {
     var el = document.createElement('textarea');
+    el.style.width = "70%";
     el.className = 'form-control';
     return el;
   },
@@ -31,15 +32,19 @@ JSONEditor.defaults.themes.bootstrap3 = JSONEditor.AbstractTheme.extend({
     if(type !== 'checkbox') {
       el.className += 'form-control';
     }
+    el.style.width = '70%';
     return el;
   },
   getFormControl: function(label, input, description) {
     var group = document.createElement('div');
-
+    group.style.display = "inline";
+//    group.style.border = "none";
     if(label && input.type === 'checkbox') {
       group.className += ' checkbox';
       label.appendChild(input);
       label.style.fontSize = '14px';
+      label.style.display = "inline";
+      input.style.float = "right";
       group.style.marginTop = '0';
       group.appendChild(label);
       input.style.position = 'relative';
@@ -47,19 +52,35 @@ JSONEditor.defaults.themes.bootstrap3 = JSONEditor.AbstractTheme.extend({
     } 
     else {
       group.className += ' form-group';
+      group.style.display = 'inline';
       if(label) {
         label.className += ' control-label';
+        label.style.display = "inline";
+        label.style.display = 'left';
+        input.style.float = "right";
         group.appendChild(label);
       }
+      label.style.display = "inline";
+      input.style.float = "right";
       group.appendChild(input);
     }
 
-    if(description) group.appendChild(description);
+//    if(description) group.appendChild(description);
+    
+    if(description){
+    	description.style.display = "inline";
+    	description.style.width = "100%";
+    	description.style.float = "right";
+    	group.appendChild(description);
+    }
+
 
     return group;
   },
   getIndentedPanel: function() {
     var el = document.createElement('div');
+    //el.style.display = 'inline';
+    //el.style.border = 'none'; 
     el.className = 'well well-sm';
     return el;
   },

@@ -75,7 +75,7 @@ JSONEditor.defaults.editors.object = JSONEditor.AbstractEditor.extend({
         var editor = self.editors[key];
         if(editor.property_removed) return;
         var found = false;
-        var width = editor.options.hidden? 0 : (editor.options.grid_columns || editor.getNumColumns());
+        var width = editor.options.hidden? 0 : editor.getNumColumns();
         var height = editor.options.hidden? 0 : editor.container.offsetHeight;
         // See if the editor will fit in any of the existing rows first
         for(var i=0; i<rows.length; i++) {
@@ -216,7 +216,7 @@ JSONEditor.defaults.editors.object = JSONEditor.AbstractEditor.extend({
         });
         self.editors[key].preBuild();
 
-        var width = self.editors[key].options.hidden? 0 : (self.editors[key].options.grid_columns || self.editors[key].getNumColumns());
+        var width = self.editors[key].options.hidden? 0 : self.editors[key].getNumColumns();
 
         self.minwidth += width;
         self.maxwidth += width;
@@ -239,8 +239,8 @@ JSONEditor.defaults.editors.object = JSONEditor.AbstractEditor.extend({
         self.addObjectProperty(key, true);
 
         if(self.editors[key]) {
-          self.minwidth = Math.max(self.minwidth,(self.editors[key].options.grid_columns || self.editors[key].getNumColumns()));
-          self.maxwidth += (self.editors[key].options.grid_columns || self.editors[key].getNumColumns());
+          self.minwidth = Math.max(self.minwidth,self.editors[key].getNumColumns());
+          self.maxwidth += self.editors[key].getNumColumns();
         }
       });
     }
@@ -273,9 +273,6 @@ JSONEditor.defaults.editors.object = JSONEditor.AbstractEditor.extend({
         if(self.editors[key].options.hidden) {
           holder.style.display = 'none';
         }
-        if(self.editors[key].options.input_width) {
-          holder.style.width = self.editors[key].options.input_width;
-        }
       });
     }
     // If the object should be rendered as a table
@@ -297,12 +294,12 @@ JSONEditor.defaults.editors.object = JSONEditor.AbstractEditor.extend({
       this.editjson_textarea.style.height = '170px';
       this.editjson_textarea.style.width = '300px';
       this.editjson_textarea.style.display = 'block';
-      this.editjson_save = this.getButton('Save','save','Save');
-      this.editjson_save.addEventListener('click',function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        self.saveJSON();
-      });
+      //this.editjson_save = this.getButton('Save','save','Save');
+      //this.editjson_save.addEventListener('click',function(e) {
+       // e.preventDefault();
+       // e.stopPropagation();
+       // self.saveJSON();
+     // });
       this.editjson_cancel = this.getButton('Cancel','cancel','Cancel');
       this.editjson_cancel.addEventListener('click',function(e) {
         e.preventDefault();
@@ -310,7 +307,7 @@ JSONEditor.defaults.editors.object = JSONEditor.AbstractEditor.extend({
         self.hideEditJSON();
       });
       this.editjson_holder.appendChild(this.editjson_textarea);
-      this.editjson_holder.appendChild(this.editjson_save);
+      //this.editjson_holder.appendChild(this.editjson_save);
       this.editjson_holder.appendChild(this.editjson_cancel);
       
       // Manage Properties modal
@@ -439,15 +436,17 @@ JSONEditor.defaults.editors.object = JSONEditor.AbstractEditor.extend({
       }
       
       // Object Properties Button
+     /*
       this.addproperty_button = this.getButton('Properties','edit','Object Properties');
       this.addproperty_button.addEventListener('click',function(e) {
         e.preventDefault();
         e.stopPropagation();
         self.toggleAddProperty();
-      });
+      }); 
       this.addproperty_controls.appendChild(this.addproperty_button);
       this.addproperty_controls.appendChild(this.addproperty_holder);
       this.refreshAddProperties();
+      */
     }
     
     // Fix table cell ordering

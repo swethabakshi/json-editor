@@ -59,7 +59,7 @@ JSONEditor.defaults.editors.multiple = JSONEditor.AbstractEditor.extend({
     $each(self.editors,function(type,editor) {
       if(!editor) return;
       if(self.type === type) {
-        if(self.keep_values) editor.setValue(current_value,true);
+        editor.setValue(current_value,true);
         editor.container.style.display = '';
       }
       else editor.container.style.display = 'none';
@@ -120,10 +120,6 @@ JSONEditor.defaults.editors.multiple = JSONEditor.AbstractEditor.extend({
     this.type = 0;
     this.editors = [];
     this.validators = [];
-    
-    this.keep_values = true;
-    if(typeof this.jsoneditor.options.keep_oneof_values !== "undefined") this.keep_values = this.jsoneditor.options.keep_oneof_values;
-    if(typeof this.options.keep_oneof_values !== "undefined") this.keep_values = this.options.keep_oneof_values;
 
     if(this.schema.oneOf) {
       this.oneOf = true;
@@ -169,8 +165,9 @@ JSONEditor.defaults.editors.multiple = JSONEditor.AbstractEditor.extend({
     this.container.appendChild(this.header);
 
     this.switcher = this.theme.getSwitcher(this.display_text);
-    container.appendChild(this.switcher);
-    this.switcher.addEventListener('change',function(e) {
+    //Commenting out below line to get rid of dropdowns with data type options in the result json display- sdk-customization
+    //container.appendChild(this.switcher);
+   /* this.switcher.addEventListener('change',function(e) {
       e.preventDefault();
       e.stopPropagation();
       
@@ -181,8 +178,9 @@ JSONEditor.defaults.editors.multiple = JSONEditor.AbstractEditor.extend({
     this.switcher.style.width = 'auto';
     this.switcher.style.display = 'inline-block';
     this.switcher.style.marginLeft = '5px';
-
+*/
     this.editor_holder = document.createElement('div');
+    this.editor_holder.style.display='inline';
     container.appendChild(this.editor_holder);
 
     this.switcher_options = this.theme.getSwitcherOptions(this.switcher);

@@ -15,7 +15,8 @@ JSONEditor.defaults.themes.bootstrap2 = JSONEditor.AbstractTheme.extend({
   },
   getFormInputLabel: function(text) {
     var el = this._super(text);
-    el.style.display = 'inline-block';
+   // el.style.display = 'inline-block';
+       //el.style.float = 'left';
     el.style.fontWeight = 'bold';
     return el;
   },
@@ -25,12 +26,14 @@ JSONEditor.defaults.themes.bootstrap2 = JSONEditor.AbstractTheme.extend({
   getSelectInput: function(options) {
     var input = this._super(options);
     input.style.width = 'auto';
-    input.style.maxWidth = '98%';
+    input.style.maxWidth = '70%';
+    //input.style.maxWidth = '98%';
     return input;
   },
   getFormInputField: function(type) {
     var el = this._super(type);
-    el.style.width = '98%';
+    el.style.width = '70%';
+    //el.style.width = '98%';
     return el;
   },
   afterInputReady: function(input) {
@@ -47,25 +50,30 @@ JSONEditor.defaults.themes.bootstrap2 = JSONEditor.AbstractTheme.extend({
   },
   getIndentedPanel: function() {
     var el = document.createElement('div');
+    //el.style.display = 'inline'; //removes borders
+    //el.style.border = 'none';
     el.className = 'well well-small';
     return el;
   },
   getFormInputDescription: function(text) {
     var el = document.createElement('p');
     el.className = 'help-inline';
+    el.style.display = 'inline';
+    el.style.float = 'right';
     el.textContent = text;
     return el;
   },
   getFormControl: function(label, input, description) {
     var ret = document.createElement('div');
     ret.className = 'control-group';
-
+    ret.style.border = "none";
     var controls = document.createElement('div');
     controls.className = 'controls';
 
     if(label && input.getAttribute('type') === 'checkbox') {
       ret.appendChild(controls);
       label.className += ' checkbox';
+      input.style.display = 'inline';
       label.appendChild(input);
       controls.appendChild(label);
       controls.style.height = '30px';
@@ -75,6 +83,7 @@ JSONEditor.defaults.themes.bootstrap2 = JSONEditor.AbstractTheme.extend({
         label.className += ' control-label';
         ret.appendChild(label);
       }
+      input.style.display = 'inline';
       controls.appendChild(input);
       ret.appendChild(controls);
     }

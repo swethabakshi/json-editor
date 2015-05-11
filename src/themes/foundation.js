@@ -30,7 +30,7 @@ JSONEditor.defaults.themes.foundation = JSONEditor.AbstractTheme.extend({
   },
   getFormInputField: function(type) {
     var el = this._super(type);
-    el.style.width = '100%';
+    el.style.width = '70%';
     el.style.marginBottom = type==='checkbox'? '0' : '12px';
     return el;
   },
@@ -43,6 +43,8 @@ JSONEditor.defaults.themes.foundation = JSONEditor.AbstractTheme.extend({
   },
   getIndentedPanel: function() {
     var el = document.createElement('div');
+    //el.style.display = 'inline';
+    //el.style.border = 'none';
     el.className = 'panel';
     return el;
   },

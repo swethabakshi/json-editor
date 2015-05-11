@@ -55,6 +55,7 @@ JSONEditor.AbstractTheme = Class.extend({
   },
   getFormInputLabel: function(text) {
     var el = document.createElement('label');
+    el.style.cssText = "float:left'";
     el.appendChild(document.createTextNode(text));
     return el;
   },
@@ -133,7 +134,7 @@ JSONEditor.AbstractTheme = Class.extend({
     var el = document.createElement('textarea');
     el.style = el.style || {};
     el.style.width = '100%';
-    el.style.height = '300px';
+    el.style.height = '180px';
     el.style.boxSizing = 'border-box';
     return el;
   },
@@ -147,6 +148,9 @@ JSONEditor.AbstractTheme = Class.extend({
   getFormInputField: function(type) {
     var el = document.createElement('input');
     el.setAttribute('type',type);
+   // if(type == "integer" || type == "number")
+    //	console.log("************integer");
+    el.style.width = '70%';
     return el;
   },
   afterInputReady: function(input) {
@@ -154,8 +158,13 @@ JSONEditor.AbstractTheme = Class.extend({
   },
   getFormControl: function(label, input, description) {
     var el = document.createElement('div');
+    el.style.width = "70%";
+    //el.style.border = "none";
+    el.style.display = "right";
     el.className = 'form-control';
     if(label) el.appendChild(label);
+    label.style.display = 'inline';
+    label.style.float = 'left';
     if(input.type === 'checkbox') {
       label.insertBefore(input,label.firstChild);
     }
@@ -169,9 +178,11 @@ JSONEditor.AbstractTheme = Class.extend({
   getIndentedPanel: function() {
     var el = document.createElement('div');
     el.style = el.style || {};
+ /*
     el.style.paddingLeft = '10px';
     el.style.marginLeft = '10px';
     el.style.borderLeft = '1px solid #ccc';
+*/
     return el;
   },
   getChildEditorHolder: function() {
@@ -179,7 +190,7 @@ JSONEditor.AbstractTheme = Class.extend({
   },
   getDescription: function(text) {
     var el = document.createElement('p');
-    el.innerHTML = text;
+    el.appendChild(document.createTextNode(text));
     return el;
   },
   getCheckboxDescription: function(text) {
@@ -196,7 +207,6 @@ JSONEditor.AbstractTheme = Class.extend({
   },
   getButton: function(text, icon, title) {
     var el = document.createElement('button');
-    el.type = 'button';
     this.setButtonText(el,text,icon,title);
     return el;
   },
