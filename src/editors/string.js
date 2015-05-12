@@ -208,7 +208,7 @@ JSONEditor.defaults.editors.string = JSONEditor.AbstractEditor.extend({
 
     if(this.format) this.input.setAttribute('data-schemaformat',this.format);
 
-    this.control = this.theme.getFormControl(this.label, this.input, this.description);
+    this.control = this.theme.getFormControl(this.label, this.input, this.schema.description);
     this.container.appendChild(this.control);
 
     // Any special formatting that needs to happen after the input is added to the dom

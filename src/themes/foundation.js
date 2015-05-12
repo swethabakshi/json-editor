@@ -30,7 +30,7 @@ JSONEditor.defaults.themes.foundation = JSONEditor.AbstractTheme.extend({
   },
   getFormInputField: function(type) {
     var el = this._super(type);
-    el.style.width = '70%';
+    el.style.width = '60%';
     el.style.marginBottom = type==='checkbox'? '0' : '12px';
     return el;
   },

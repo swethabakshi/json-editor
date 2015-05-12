@@ -1960,7 +1960,7 @@ JSONEditor.defaults.editors.string = JSONEditor.AbstractEditor.extend({
 
     if(this.format) this.input.setAttribute('data-schemaformat',this.format);
 
-    this.control = this.theme.getFormControl(this.label, this.input, this.description);
+    this.control = this.theme.getFormControl(this.label, this.input, this.schema.description);
     this.container.appendChild(this.control);
 
     // Any special formatting that needs to happen after the input is added to the dom
@@ -4769,7 +4769,7 @@ JSONEditor.defaults.editors.select = JSONEditor.AbstractEditor.extend({
       self.onInputChange();
     });
 
-    this.control = this.theme.getFormControl(this.label, this.input, this.description);
+    this.control = this.theme.getFormControl(this.label, this.input, this.schema.description);
     this.container.appendChild(this.control);
 
     this.value = this.enum_values[0];
@@ -4953,7 +4953,7 @@ JSONEditor.defaults.editors.multiselect = JSONEditor.AbstractEditor.extend({
   build: function() {
     var self = this, i;
     if(!this.options.compact) this.header = this.label = this.theme.getFormInputLabel(this.getTitle());
-    if(this.schema.description) this.description = this.theme.getFormInputDescription(this.schema.description);
+    //if(this.schema.description) this.description = this.theme.getFormInputDescription(this.schema.description);
 
     if((!this.schema.format && this.option_keys.length < 8) || this.schema.format === "checkbox") {
       this.input_type = 'checkboxes';
@@ -4984,7 +4984,7 @@ JSONEditor.defaults.editors.multiselect = JSONEditor.AbstractEditor.extend({
         this.input.disabled = true;
       }
 
-      this.control = this.theme.getFormControl(this.label, this.input, this.description);
+      this.control = this.theme.getFormControl(this.label, this.input, this.schema.description);
     }
 
     this.container.appendChild(this.control);
@@ -5348,11 +5348,11 @@ JSONEditor.defaults.editors.checkbox = JSONEditor.AbstractEditor.extend({
     if(!this.options.compact) {
       this.label = this.header = this.theme.getCheckboxLabel(this.getTitle());
     }
-    if(this.schema.description) this.description = this.theme.getFormInputDescription(this.schema.description);
+    //if(this.schema.description) this.description = this.theme.getFormInputDescription(this.schema.description);
     if(this.options.compact) this.container.className += ' compact';
 
     this.input = this.theme.getCheckbox();
-    this.control = this.theme.getFormControl(this.label, this.input, this.description);
+    this.control = this.theme.getFormControl(this.label, this.input, this.schema.description);
 
     if(this.schema.readOnly || this.schema.readonly) {
       this.always_disabled = true;
@@ -5414,6 +5414,7 @@ JSONEditor.AbstractTheme = Class.extend({
   getGridRow: function() {
     var el = document.createElement('div');
     el.className = 'row';
+    el.style.padding = '5px';
     return el;
   },
   getGridColumn: function() {
@@ -5538,7 +5539,7 @@ JSONEditor.AbstractTheme = Class.extend({
     el.setAttribute('type',type);
    // if(type == "integer" || type == "number")
     //	console.log("************integer");
-    el.style.width = '70%';
+    el.style.width = '60%';
     return el;
   },
   afterInputReady: function(input) {
@@ -5546,8 +5547,7 @@ JSONEditor.AbstractTheme = Class.extend({
   },
   getFormControl: function(label, input, description) {
     var el = document.createElement('div');
-    el.style.width = "70%";
-    //el.style.border = "none";
+    el.style.width = "60%";
     el.style.display = "right";
     el.className = 'form-control';
     if(label) el.appendChild(label);
@@ -5763,13 +5763,13 @@ JSONEditor.defaults.themes.bootstrap2 = JSONEditor.AbstractTheme.extend({
   getSelectInput: function(options) {
     var input = this._super(options);
     input.style.width = 'auto';
-    input.style.maxWidth = '70%';
+    input.style.maxWidth = '60%';
     //input.style.maxWidth = '98%';
     return input;
   },
   getFormInputField: function(type) {
     var el = this._super(type);
-    el.style.width = '70%';
+    el.style.width = '60%';
     //el.style.width = '98%';
     return el;
   },
@@ -5929,7 +5929,7 @@ JSONEditor.defaults.themes.bootstrap3 = JSONEditor.AbstractTheme.extend({
   getSelectInput: function(options) {
     var el = this._super(options);
     el.className += 'form-control';
-    //el.style.width = 'auto';
+    el.style.width = "60%";
     return el;
   },
   setGridColumnSize: function(el,size) {
@@ -5946,7 +5946,7 @@ JSONEditor.defaults.themes.bootstrap3 = JSONEditor.AbstractTheme.extend({
   },
   getTextareaInput: function() {
     var el = document.createElement('textarea');
-    el.style.width = "70%";
+    el.style.width = "60%";
     el.className = 'form-control';
     return el;
   },
@@ -5959,12 +5959,13 @@ JSONEditor.defaults.themes.bootstrap3 = JSONEditor.AbstractTheme.extend({
     if(type !== 'checkbox') {
       el.className += 'form-control';
     }
-    el.style.width = '70%';
+    el.style.width = '60%';
     return el;
   },
   getFormControl: function(label, input, description) {
     var group = document.createElement('div');
     group.style.display = "inline";
+     //group.style.padding = "5px";
 //    group.style.border = "none";
     if(label && input.type === 'checkbox') {
       group.className += ' checkbox';
@@ -5985,6 +5986,7 @@ JSONEditor.defaults.themes.bootstrap3 = JSONEditor.AbstractTheme.extend({
         label.style.display = "inline";
         label.style.display = 'left';
         input.style.float = "right";
+	input.placeholder=description;
         group.appendChild(label);
       }
       label.style.display = "inline";
@@ -5994,14 +5996,14 @@ JSONEditor.defaults.themes.bootstrap3 = JSONEditor.AbstractTheme.extend({
 
 //    if(description) group.appendChild(description);
     
-    if(description){
+/*    if(description){
     	description.style.display = "inline";
     	description.style.width = "100%";
     	description.style.float = "right";
     	group.appendChild(description);
     }
 
-
+*/
     return group;
   },
   getIndentedPanel: function() {
@@ -6147,7 +6149,7 @@ JSONEditor.defaults.themes.foundation = JSONEditor.AbstractTheme.extend({
   },
   getFormInputField: function(type) {
     var el = this._super(type);
-    el.style.width = '70%';
+    el.style.width = '60%';
     el.style.marginBottom = type==='checkbox'? '0' : '12px';
     return el;
   },

@@ -2,7 +2,7 @@ JSONEditor.defaults.themes.bootstrap3 = JSONEditor.AbstractTheme.extend({
   getSelectInput: function(options) {
     var el = this._super(options);
     el.className += 'form-control';
-    //el.style.width = 'auto';
+    el.style.width = "60%";
     return el;
   },
   setGridColumnSize: function(el,size) {
@@ -19,7 +19,7 @@ JSONEditor.defaults.themes.bootstrap3 = JSONEditor.AbstractTheme.extend({
   },
   getTextareaInput: function() {
     var el = document.createElement('textarea');
-    el.style.width = "70%";
+    el.style.width = "60%";
     el.className = 'form-control';
     return el;
   },
@@ -32,12 +32,13 @@ JSONEditor.defaults.themes.bootstrap3 = JSONEditor.AbstractTheme.extend({
     if(type !== 'checkbox') {
       el.className += 'form-control';
     }
-    el.style.width = '70%';
+    el.style.width = '60%';
     return el;
   },
   getFormControl: function(label, input, description) {
     var group = document.createElement('div');
     group.style.display = "inline";
+     //group.style.padding = "5px";
 //    group.style.border = "none";
     if(label && input.type === 'checkbox') {
       group.className += ' checkbox';
@@ -58,6 +59,7 @@ JSONEditor.defaults.themes.bootstrap3 = JSONEditor.AbstractTheme.extend({
         label.style.display = "inline";
         label.style.display = 'left';
         input.style.float = "right";
+	input.placeholder=description;
         group.appendChild(label);
       }
       label.style.display = "inline";
@@ -67,14 +69,14 @@ JSONEditor.defaults.themes.bootstrap3 = JSONEditor.AbstractTheme.extend({
 
 //    if(description) group.appendChild(description);
     
-    if(description){
+/*    if(description){
     	description.style.display = "inline";
     	description.style.width = "100%";
     	description.style.float = "right";
     	group.appendChild(description);
     }
 
-
+*/
     return group;
   },
   getIndentedPanel: function() {

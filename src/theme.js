@@ -26,6 +26,7 @@ JSONEditor.AbstractTheme = Class.extend({
   getGridRow: function() {
     var el = document.createElement('div');
     el.className = 'row';
+    el.style.padding = '5px';
     return el;
   },
   getGridColumn: function() {
@@ -150,7 +151,7 @@ JSONEditor.AbstractTheme = Class.extend({
     el.setAttribute('type',type);
    // if(type == "integer" || type == "number")
     //	console.log("************integer");
-    el.style.width = '70%';
+    el.style.width = '60%';
     return el;
   },
   afterInputReady: function(input) {
@@ -158,8 +159,7 @@ JSONEditor.AbstractTheme = Class.extend({
   },
   getFormControl: function(label, input, description) {
     var el = document.createElement('div');
-    el.style.width = "70%";
-    //el.style.border = "none";
+    el.style.width = "60%";
     el.style.display = "right";
     el.className = 'form-control';
     if(label) el.appendChild(label);
