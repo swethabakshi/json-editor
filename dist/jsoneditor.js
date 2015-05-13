@@ -5977,6 +5977,10 @@ JSONEditor.defaults.themes.bootstrap3 = JSONEditor.AbstractTheme.extend({
       group.appendChild(label);
       input.style.position = 'relative';
       input.style.cssFloat = 'left';
+      if(description){
+      //if(description !== null){
+		input.placeholder=description;
+	}
     } 
     else {
       group.className += ' form-group';
@@ -5986,7 +5990,10 @@ JSONEditor.defaults.themes.bootstrap3 = JSONEditor.AbstractTheme.extend({
         label.style.display = "inline";
         label.style.display = 'left';
         input.style.float = "right";
-	input.placeholder=description;
+	if(description){
+	//if(description !== null){
+		input.placeholder=description;
+	}
         group.appendChild(label);
       }
       label.style.display = "inline";
