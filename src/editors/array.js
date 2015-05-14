@@ -98,6 +98,8 @@ JSONEditor.defaults.editors.array = JSONEditor.AbstractEditor.extend({
       }
       else {
         this.panel = this.theme.getIndentedPanel();
+	this.panel.style.maxHeight="400px";
+        this.panel.style.overflowY="auto";
         this.container.appendChild(this.panel);
         this.row_holder = document.createElement('div');
         this.panel.appendChild(this.row_holder);
@@ -107,6 +109,8 @@ JSONEditor.defaults.editors.array = JSONEditor.AbstractEditor.extend({
     }
     else {
         this.panel = this.theme.getIndentedPanel();
+        this.panel.style.maxHeight="400px";
+        this.panel.style.overflowY="auto";
         this.container.appendChild(this.panel);
        /* this.controls = this.theme.getButtonHolder();
         this.panel.appendChild(this.controls);

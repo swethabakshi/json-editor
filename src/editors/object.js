@@ -380,11 +380,12 @@ JSONEditor.defaults.editors.object = JSONEditor.AbstractEditor.extend({
       // Control buttons
       this.title_controls = this.theme.getHeaderButtonHolder();
       this.editjson_controls = this.theme.getHeaderButtonHolder();
-      this.addproperty_controls = this.theme.getHeaderButtonHolder();
+     // this.addproperty_controls = this.theme.getHeaderButtonHolder();
       this.title.appendChild(this.title_controls);
       this.title.appendChild(this.editjson_controls);
-      this.title.appendChild(this.addproperty_controls);
+     // this.title.appendChild(this.addproperty_controls);
 
+      /* commenting out for SDK customization, removing all the collapse and json view buttons for non root nodes
       // Show/Hide button
       this.collapsed = false;
       this.toggle_button = this.getButton('','collapse','Collapse');
@@ -408,7 +409,8 @@ JSONEditor.defaults.editors.object = JSONEditor.AbstractEditor.extend({
       if(this.options.collapsed) {
         $trigger(this.toggle_button,'click');
       }
-      
+      */
+
       // Collapse button disabled
       if(this.schema.options && typeof this.schema.options.disable_collapse !== "undefined") {
         if(this.schema.options.disable_collapse) this.toggle_button.style.display = 'none';
@@ -417,6 +419,7 @@ JSONEditor.defaults.editors.object = JSONEditor.AbstractEditor.extend({
         this.toggle_button.style.display = 'none';
       }
       
+	/* commenting out for SDK customization, removing all the collapse and json view buttons for non root nodes      
       // Edit JSON Button
       this.editjson_button = this.getButton('JSON','edit','Edit JSON');
       this.editjson_button.addEventListener('click',function(e) {
@@ -426,7 +429,7 @@ JSONEditor.defaults.editors.object = JSONEditor.AbstractEditor.extend({
       });
       this.editjson_controls.appendChild(this.editjson_button);
       this.editjson_controls.appendChild(this.editjson_holder);
-      
+      */
       // Edit JSON Buttton disabled
       if(this.schema.options && typeof this.schema.options.disable_edit_json !== "undefined") {
         if(this.schema.options.disable_edit_json) this.editjson_button.style.display = 'none';
